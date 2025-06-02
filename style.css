@@ -79,7 +79,8 @@ body {
 }
 
 .result {
-    background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 50% / 20px 20px;
+    /* background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 50% / 20px 20px; */
+    background: #0001;
 
     border: 1px solid #fffa;
     border-radius: 20px;
