@@ -93,13 +93,17 @@ body {
 
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .tablet {
     transform: translateX(-90px);
+    height: 245px;
+    transition: 200ms ease;
 }
 
 .tablet #text {
+    transition: 200ms ease;
     font-family: hyperLightGlyph;
     width: 100px;
     position: absolute;
@@ -111,6 +115,7 @@ body {
 }
 
 .tablet-image {
+    transition: 200ms ease;
     position: absolute;
     user-select: none;
     -webkit-user-drag: none;

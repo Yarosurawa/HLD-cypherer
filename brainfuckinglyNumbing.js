@@ -29,4 +29,25 @@ function render() {
 }
 
 spaceCBox.checked ? text = inputEl.value: text = (inputEl.value).replace(/ /g,'')
-render()
+if(spaceCBox.checked && text.length < tabletHeight * tabletWidth) { render()}
+else if (!spaceCBox.checked && text.replace(/ /g,'').length < tabletHeight * tabletWidth) {render()}
+
+
+
+
+const borderImg = document.querySelector('.tablet-image');
+const borderCBox = document.getElementById('border-cbox');
+borderCBox.checked = true;
+
+borderCBox.addEventListener("change", ()=>{
+    if (borderCBox.checked) {
+        document.querySelector(".tablet").style.height = "245px"
+        borderImg.style.opacity = 1;
+        textEl.style.scale = 1;
+    } else {
+        document.querySelector(".tablet").style.height = "260px"
+        borderImg.style.opacity = 0;
+        textEl.style.scale = 1.5;
+    }
+    
+})
