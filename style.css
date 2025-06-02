@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap');
+
+@font-face {
+    font-family: hyperLightGlyph;
+    src: url(hyper-light-glyph-modded.ttf);
+}
+
+* {
+    margin: 0;
+    color: white;
+    font-family: "Ancizar Serif", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    height: 100vh;
+    background-image:
+        radial-gradient(ellipse at top, #242424, #000b),
+        radial-gradient(ellipse at bottom, #212121, #1116);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.main-side {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin: 0 50px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs {
+    background-color: #11111105;
+    border: 1px solid #fffa;
+    border-radius: 20px;
+    box-shadow: 0 0 15px -5px #fff;
+
+    width: 500px;
+    min-height: 200px;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.text-input {
+    background-color: #11111105;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 20px;
+
+    border: 1px solid #fffa;
+    border-radius: 20px;
+    box-shadow: 0 0 15px -5px #fff;
+
+    outline: none;
+    transition: 200ms ease;
+}
+
+.text-input:focus {
+    box-shadow: 0 0 15px -2px #fff;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox-container {
+    margin: 0 20px;
+    user-select: none;
+}
+
+.result {
+    background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 50% / 20px 20px;
+
+    border: 1px solid #fffa;
+    border-radius: 20px;
+    box-shadow: 0 0 15px -5px #fff;
+
+    width: 500px;
+    min-height: 300px;
+    margin-top: 20px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.tablet {
+    transform: translateX(-90px);
+}
+
+.tablet #text {
+    font-family: hyperLightGlyph;
+    width: 100px;
+    position: absolute;
+    margin: 0;
+    line-height: 17.5px;
+    font-size: 15px;
+    margin-top: 52.5px;
+    margin-left: 45px;
+}
+
+.tablet-image {
+    position: absolute;
+    user-select: none;
+    -webkit-user-drag: none;
+    margin: 0;
+}
