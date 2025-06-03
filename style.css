@@ -23,6 +23,8 @@ body {
 .container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .main-side {
@@ -30,7 +32,7 @@ body {
     flex-direction: column;
     width: 30vw;
     margin: 0 50px;
-    height: 100vh;
+    height: 40vh;
     justify-content: center;
     align-items: center;
 }
@@ -41,16 +43,17 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 15px -5px #fff;
 
-    width: 500px;
+    width: 100%;
     min-height: 200px;
     margin-top: 20px;
+    padding: 10px;
 
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.text-input {
+.text-input, input[type="text"], input[type="number"] {
     background-color: #11111105;
     padding: 10px 20px;
     font-size: 20px;
@@ -62,6 +65,19 @@ body {
 
     outline: none;
     transition: 200ms ease;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.number-input {
+    padding: 5px 15px!important;
+    width: 50px;
+    appearance: none;
+    margin: 10px 0 !important;
 }
 
 .text-input:focus {
@@ -78,6 +94,20 @@ body {
     user-select: none;
 }
 
+.slider-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .result {
     /* background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 50% / 20px 20px; */
     background: #0001;
@@ -86,8 +116,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 15px -5px #fff;
 
-    width: 500px;
-    min-height: 300px;
+    width: auto;
+    height: auto;
     margin-top: 20px;
     padding: 20px;
 
@@ -97,7 +127,7 @@ body {
 }
 
 .tablet {
-    transform: translateX(-90px);
+    width: 180px;
     height: 245px;
     transition: 200ms ease;
 }
@@ -108,10 +138,14 @@ body {
     width: 100px;
     position: absolute;
     margin: 0;
-    line-height: 17.5px;
+    line-height: 20px;
     font-size: 15px;
     margin-top: 52.5px;
     margin-left: 45px;
+}
+
+body.firefox .tablet #text {
+    line-height: 17.5px;
 }
 
 .tablet-image {
@@ -120,4 +154,18 @@ body {
     user-select: none;
     -webkit-user-drag: none;
     margin: 0;
+}
+
+@media (orientation: portrait) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .main-side {
+    width: 40vw;
+    margin-bottom: 80px;
+  }
+
+  
 }

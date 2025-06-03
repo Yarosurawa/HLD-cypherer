@@ -2,15 +2,42 @@ const inputEl = document.getElementById('text-input');
 const spaceCBox = document.getElementById('space-cbox')
 const textEl = document.getElementById('text')
 
-let tabletWidth = 4;
-let tabletHeight = 8;
+if (navigator.userAgent.includes("Firefox")) {
+  document.body.classList.add("firefox");
+} else if (navigator.userAgent.includes("Chrome")) {
+  document.body.classList.add("chrome");
+} else if (navigator.userAgent.includes("Safari")) {
+  document.body.classList.add("safari");
+}
 
-inputEl.attributes.maxlength = 4*8
+const heightInput = document.getElementById('height-input');
+const heightInputNum = document.getElementById('height-input-num');
+const widthInput = document.getElementById('width-input');
+const widthInputNum = document.getElementById('width-input-num');
 
-inputEl.addEventListener("keyup", ()=>{
+
+let tabletWidth = parseInt(widthInput.value);
+let tabletHeight = parseInt(heightInput.value);
+
+[heightInput, heightInputNum, widthInput, widthInputNum].forEach(input => {input.addEventListener('input', ()=>{changeSize()})});
+
+function changeSize() {
+    heightInputNum.value = heightInput.value;
+    heightInput.value = heightInputNum.value;
+    widthInputNum.value = widthInput.value;
+    widthInput.value = widthInputNum.value;
+    tabletWidth = parseInt(widthInput.value)
+    tabletHeight = parseInt(heightInput.value);
+
+    document.querySelector('.tablet').style.width = `${tabletWidth*40 + 20}px`
+    document.querySelector('.tablet').style.height = `${tabletHeight*40 + 5}px`
+    render();
+}
+
+inputEl.addEventListener("input", ()=>{
     spaceCBox.checked ? text = inputEl.value: text = (inputEl.value).replace(/ /g,'')
-    if(spaceCBox.checked && text.length < tabletHeight * tabletWidth) { render()}
-    else if (!spaceCBox.checked && text.replace(/ /g,'').length < tabletHeight * tabletWidth) {render()}
+    if(spaceCBox.checked && text.length <= tabletHeight * tabletWidth) {render()}
+    else if (!spaceCBox.checked && text.replace(/ /g,'').length <= tabletHeight * tabletWidth) {render()}
 })
 spaceCBox.addEventListener("change", ()=>{render();})
 
@@ -22,15 +49,15 @@ function render() {
     
     inputEl.attributes.maxlength = toString(tabletHeight * tabletWidth)
     for (let i = 0; i < text.length; i++) {  
-        array[i%tabletHeight] = `${array[i%tabletHeight].slice(0, Math.floor(i/8))}${text[i]}<br>`
+        array[i%tabletHeight] = `${array[i%tabletHeight].slice(0, Math.floor(i/tabletHeight))}${text[i]}<br>`
         textEl.innerHTML = array.join("").replaceAll(" ", "&nbsp;")
     }
     
 }
 
 spaceCBox.checked ? text = inputEl.value: text = (inputEl.value).replace(/ /g,'')
-if(spaceCBox.checked && text.length < tabletHeight * tabletWidth) { render()}
-else if (!spaceCBox.checked && text.replace(/ /g,'').length < tabletHeight * tabletWidth) {render()}
+if(spaceCBox.checked && text.length <= tabletHeight * tabletWidth) { render()}
+else if (!spaceCBox.checked && text.replace(/ /g,'').length <= tabletHeight * tabletWidth) {render()}
 
 
 

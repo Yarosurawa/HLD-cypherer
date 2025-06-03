@@ -13,6 +13,22 @@
             <hr width="300">
             <div class="inputs">
                 <input type="text" id="text-input" class="text-input" placeholder="Text to cipher">
+                <div class="slider-inputs">
+                    <div class="slider-container">
+                        <div class="slider-text">
+                            <label for="width-input">width</label>
+                            <input type="number" name="width" id="width-input-num" class="number-input" value="4" min="1" max="16">
+                        </div>
+                        <input type="range" name="width" id="width-input" min="1" max="16" value="4">
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider-text">
+                            <label for="height-input">height</label>
+                            <input type="number" name="height" id="height-input-num" class="number-input" value="8" min="1" max="16">
+                        </div>
+                        <input type="range" name="height" id="height-input" min="1" max="16" value="8">
+                    </div>
+                </div>
                 <div class="checkboxes">
                     <div class="checkbox-container">
                         <input type="checkbox" id="space-cbox">
