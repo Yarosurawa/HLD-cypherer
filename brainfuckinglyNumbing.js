@@ -29,8 +29,8 @@ function changeSize() {
     tabletWidth = parseInt(widthInput.value)
     tabletHeight = parseInt(heightInput.value);
 
-    document.querySelector('.tablet').style.width = `${tabletWidth*40 + 20}px`
-    document.querySelector('.tablet').style.height = `${tabletHeight*40 + 5}px`
+    document.querySelector('.tablet').style.width = `${tabletWidth*40 + 25}px`
+    document.querySelector('.tablet').style.height = `${tabletHeight*25 + 60}px`
     render();
 }
 
