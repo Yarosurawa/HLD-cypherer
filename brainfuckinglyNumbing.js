@@ -82,11 +82,13 @@ inputEl.addEventListener("input", ()=>{
     if(spaceCBox.checked && text.length <= tabletHeight * tabletWidth) {render()}
     else if (!spaceCBox.checked && text.replace(/ /g,'').length <= tabletHeight * tabletWidth) {render()}
 })
-spaceCBox.addEventListener("change", ()=>{render();})
+spaceCBox.addEventListener("input", ()=>{render();})
 
 let array = Array(tabletHeight).fill("");
 
 function render() {    
+    console.log('render');
+    spaceCBox.checked ? text = inputEl.value: text = (inputEl.value).replace(/ /g,'')
     let array = Array(tabletHeight).fill("<br>");
     textEl.innerHTML = '<br>'.repeat(tabletHeight)
     
