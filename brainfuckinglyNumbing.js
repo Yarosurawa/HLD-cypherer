@@ -69,7 +69,7 @@ function changeSize() {
     let AddedWidth = tabletStyles[currentTabletStyle].x;
     let AddedHeight = tabletStyles[currentTabletStyle].y;
     textEl.style.width = `${tabletWidth*25 - 1}px`
-    textEl.style.height = `${tabletHeight*20 - 1}px`
+    textEl.style.height = `${tabletHeight*20}px`
     textEl.style.marginLeft = `${tabletStyles[currentTabletStyle].ml}px`;
     textEl.style.marginTop = `${tabletStyles[currentTabletStyle].mt}px`;
     document.querySelector('.tablet').style.width = `${tabletWidth*25 + AddedWidth}px`
