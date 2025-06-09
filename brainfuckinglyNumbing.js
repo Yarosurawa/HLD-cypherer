@@ -19,6 +19,9 @@ const widthInputNum = document.getElementById('width-input-num');
 let tabletWidth = parseInt(widthInput.value);
 let tabletHeight = parseInt(heightInput.value);
 
+let AddedHeight = 90;
+let AddedWidth = 75;
+
 [heightInput, heightInputNum, widthInput, widthInputNum].forEach(input => {input.addEventListener('input', ()=>{changeSize()})});
 
 function changeSize() {
@@ -28,9 +31,11 @@ function changeSize() {
     widthInput.value = widthInputNum.value;
     tabletWidth = parseInt(widthInput.value)
     tabletHeight = parseInt(heightInput.value);
+    textEl.style.width = `${tabletWidth*25 - 1}px`
+    textEl.style.height = `${tabletHeight*20 - 1}px`
 
-    document.querySelector('.tablet').style.width = `${tabletWidth*40 + 25}px`
-    document.querySelector('.tablet').style.height = `${tabletHeight*25 + 60}px`
+    document.querySelector('.tablet').style.width = `${tabletWidth*25 + AddedWidth}px`
+    document.querySelector('.tablet').style.height = `${tabletHeight*20 + AddedHeight}px`
     render();
 }
 
@@ -59,22 +64,26 @@ spaceCBox.checked ? text = inputEl.value: text = (inputEl.value).replace(/ /g,''
 if(spaceCBox.checked && text.length <= tabletHeight * tabletWidth) { render()}
 else if (!spaceCBox.checked && text.replace(/ /g,'').length <= tabletHeight * tabletWidth) {render()}
 
-
-
-
 const borderImg = document.querySelector('.tablet-image');
 const borderCBox = document.getElementById('border-cbox');
 borderCBox.checked = true;
 
 borderCBox.addEventListener("change", ()=>{
     if (borderCBox.checked) {
-        document.querySelector(".tablet").style.height = "245px"
         borderImg.style.opacity = 1;
-        textEl.style.scale = 1;
+        textEl.style.marginTop = "52.5px";
+        textEl.style.marginLeft = "45px";
+        AddedHeight = 120;
+        AddedWidth = 90;
     } else {
-        document.querySelector(".tablet").style.height = "260px"
         borderImg.style.opacity = 0;
-        textEl.style.scale = 1.5;
+        textEl.style.marginTop = "0px";
+        textEl.style.marginLeft = "5px";
+        AddedHeight = 0;
+        AddedWidth = 0;
     }
-    
+    changeSize();
 })
+
+render();
+changeSize();
