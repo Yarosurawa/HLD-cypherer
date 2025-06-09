@@ -12,17 +12,17 @@
         <div class="left-side main-side">
             <h1>Inputs</h1>
             <hr width="300">
-            <div class="inputs">
+            <div class="inputs flex-center flex-vert">
                 <input type="text" id="text-input" class="text-input" placeholder="Text to cipher">
                 <div class="slider-inputs">
-                    <div class="slider-container">
+                    <div class="slider-container flex-center flex-vert">
                         <div class="slider-text">
                             <label for="width-input">width</label>
                             <input type="number" name="width" id="width-input-num" class="number-input" value="4" min="1" max="16">
                         </div>
                         <input type="range" name="width" id="width-input" min="1" max="16" value="4">
                     </div>
-                    <div class="slider-container">
+                    <div class="slider-container flex-center flex-vert">
                         <div class="slider-text">
                             <label for="height-input">height</label>
                             <input type="number" name="height" id="height-input-num" class="number-input" value="8" min="1" max="16">
@@ -33,14 +33,15 @@
                 <div class="checkboxes">
                     <div class="checkbox-container">
                         <input type="checkbox" id="space-cbox">
-                        <label for="space-cbox">Include spaces(not in game)</label>
+                        <label for="space-cbox">Include spaces</label>
                     </div>
                     <div class="checkbox-container" onclick="">
                         <input type="checkbox" id="border-cbox" checked="true">
                         <label for="border-cbox">Show background</label>
                     </div>
                 </div>
-                <div class="tablet-styles">
+                <div class="tablet-styles flex-center flex-vert">
+                    <label for="tablet-style-select">Style of the border</label>
                     <select name="tablet-style-select" id="tablet-style-select">
                         <option value="0">0: none</option>
                         <option value="1">1: (4x8)</option>

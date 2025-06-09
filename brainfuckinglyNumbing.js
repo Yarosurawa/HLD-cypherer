@@ -21,23 +21,22 @@ const borderCBox = document.getElementById('border-cbox');
 
 class TabletStyle {
     constructor(img, x, y, w, h, xMin, yMin, xMax, yMax, mt, ml) {
-        this.img = img
-        this.x = x
-        this.y = y
-        this.w = w
-        this.h = h
-        this.xMin = xMin
-        this.xMax = xMax
-        this.yMin = yMin
-        this.yMax = yMax
-        this.mt = mt
-        this.ml = ml
+        this.x = x, this.yMax = yMax,
+        this.y = y, this.yMin = yMin, 
+        this.w = w, this.xMax = xMax,
+        this.h = h, this.xMin = xMin,
+        this.mt = mt, this.ml = ml,
+        this.img0 = img[0]
+        this.img1 = img[1]
+        this.img2 = img[2]
+        this.img3 = img[3]
+        this.img4 = img[4]
     }
 }
 
 const tabletStyles = [
-    new TabletStyle("", 0, 0, 0, 0, 1, 1, 16, 16, 0, 0),
-    new TabletStyle("./img/frame1.png", 75, 90, 180, 245, 4, 8, 4, 8, 52.5, 45)
+    new TabletStyle([""], 0, 0, 0, 0, 1, 1, 16, 16, 0, 0),
+    new TabletStyle(["./img/frame1.png"], 75, 90, 180, 245, 4, 8, 4, 8, 52.5, 45)
 ]
 
 currentTabletStyle = tabletStyleSelect.value
@@ -57,7 +56,7 @@ function changeSize() {
 
     borderImg.width = tabletStyles[currentTabletStyle].w
     borderImg.height = tabletStyles[currentTabletStyle].h
-    borderImg.src = tabletStyles[currentTabletStyle].img
+    borderImg.src = tabletStyles[currentTabletStyle].img0
 
     heightInputNum.value = heightInput.value;
     heightInput.value = heightInputNum.value;
