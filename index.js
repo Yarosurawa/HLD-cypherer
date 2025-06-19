@@ -1,7 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
-const { discordToken } = require('./config.json');
+try {
+	const { discordToken } = require('./config.json');
+	var token = discordToken;
+} catch (error) {
+	var token = process.env.DISCORD_TOKEN;
+}
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -9,7 +14,7 @@ client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
-client.login(discordToken);
+client.login(token);
 
 client.commands = new Collection();
 

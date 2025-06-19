@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 function charToGlyph(char) {
 	switch (char) {
@@ -124,8 +124,10 @@ module.exports = {
 	async execute(interaction) {
 		const input = interaction.options.getString('input');
 		const height = interaction.options.getInteger('height');
-		await interaction.reply(`\`\`\`
-${sortGlyphs(input, height)}\`\`\``)
+		await interaction.reply({
+			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\``,
+			flags: interaction.options.getBoolean('etheral') ? MessageFlags.Ephemeral : ''
+		})
 	},
 };
 

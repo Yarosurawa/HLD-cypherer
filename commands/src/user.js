@@ -6,6 +6,6 @@ module.exports = {
 		.setDescription('Provides information about the user.'),
 	async execute(interaction) {
 		console.log(interaction);
-		await interaction.reply(`Potatoe`);
+		await interaction.reply(interaction.user);
 	},
 };
