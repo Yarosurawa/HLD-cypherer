@@ -7,7 +7,7 @@ module.exports = {
 	async execute(interaction) {
 		console.log(interaction);
 		await interaction.reply({
-			content:interaction.user,
+			content:interaction.user.username,
 			flags: MessageFlags.Ephemeral
 		});
 	},
