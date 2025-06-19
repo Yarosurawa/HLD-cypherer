@@ -6,6 +6,9 @@ module.exports = {
 		.setDescription('Provides information about the user.'),
 	async execute(interaction) {
 		console.log(interaction);
-		await interaction.reply(interaction.user);
+		await interaction.reply({
+			content:interaction.user,
+			flags: MessageFlags.Ephemeral
+		});
 	},
 };
