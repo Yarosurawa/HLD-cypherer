@@ -1,10 +1,11 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, discordToken } = require('./config.json');
 try {
-	const { discordToken } = require('./config.json');
+	const { clientId, guildId, discordToken } = require('./config.json');
 	var token = discordToken;
 } catch (error) {
 	var token = process.env.DISCORD_TOKEN;
+	var clientId = process.env.CLIENT_ID;
+	var guildId = process.env.GUILD_ID;
 }
 
 const fs = require('node:fs');
