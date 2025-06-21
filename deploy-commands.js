@@ -14,7 +14,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const commands = [];
-const foldersPath = path.join(__dirname, 'dev_commands');
+const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath).filter(folder =>
     fs.lstatSync(path.join(foldersPath, folder)).isDirectory()
 );
