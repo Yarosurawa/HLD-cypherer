@@ -108,7 +108,6 @@ function sortGlyphs(string, height) {
 
 function getTranslation(val, text) {
 	if (val.options.getBoolean('translation')) {
-		const text = 
 		`## Translation: \n || ${text} ||`
 	} else {
 		""
