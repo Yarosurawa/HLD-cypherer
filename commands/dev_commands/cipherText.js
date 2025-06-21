@@ -107,10 +107,10 @@ function sortGlyphs(string, height) {
 }
 
 function getTranslation(val) {
-	if (val.options.getBoolean('translation')) {
+	if (val.options.getBoolean('translation') === true) {
 		return `## Translation: \n || ${val.options.getString('input')} ||`
 	} else {
-		return ""
+		return " "
 	}
 }
 
