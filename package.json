@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint",
-    "commands": "node deploy-commands.js",
-    "global": "node deploy-global.js",
+    "commands": "concurrently \"node deploy-commands.js\" \"node deploy-global\"",
     "serve": "concurrently \"nodemon index.js\" \"nodemon deploy-commands.js\"",
     "start": "node index.js"
   },
