@@ -106,11 +106,11 @@ function sortGlyphs(string, height) {
 	return text;
 }
 
-function getTranslation(val, text) {
+function getTranslation(val) {
 	if (val.options.getBoolean('translation')) {
-		`## Translation: \n || ${text} ||`
+		return `## Translation: \n || ${val.options.getString('input')} ||`
 	} else {
-		""
+		return ""
 	}
 }
 
@@ -135,7 +135,7 @@ module.exports = {
 		const input = interaction.options.getString('input');
 		const height = interaction.options.getInteger('height');
 		await interaction.reply({
-			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(interaction, input)}`,
+			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(interaction)}`,
 			flags: interaction.options.getBoolean('private') ? MessageFlags.Ephemeral : ''
 		})
 	},
