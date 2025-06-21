@@ -106,6 +106,14 @@ function sortGlyphs(string, height) {
 	return text;
 }
 
+function getTranslation(val) {
+	if (val.options.getBoolean('translation') === true) {
+		return `## Translation: \n || ${val.options.getString('input')} ||`
+	} else {
+		return " "
+	}
+}
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cipher')
@@ -116,17 +124,19 @@ module.exports = {
 				.setRequired(true))
 		.addIntegerOption(option =>
 			option.setName('height')
-				.setDescription("The height of the tablet")
-		)
+				.setDescription("The height of the tablet"))
 		.addBooleanOption(option =>
-			option.setName('etheral')
-				.setDescription('Should it be ephemeral')),
+			option.setName('private')
+				.setDescription('Should it be only visible to the user'))
+		.addBooleanOption(option =>
+			option.setName('translation')
+				.setDescription('Should it have a translation beneath the glyphs? (It will be marked as spoilers, making them hidden)')),
 	async execute(interaction) {
 		const input = interaction.options.getString('input');
 		const height = interaction.options.getInteger('height');
 		await interaction.reply({
-			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\``,
-			flags: interaction.options.getBoolean('etheral') ? MessageFlags.Ephemeral : ''
+			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(interaction)}`,
+			flags: interaction.options.getBoolean('private') ? MessageFlags.Ephemeral : ''
 		})
 	},
 };
