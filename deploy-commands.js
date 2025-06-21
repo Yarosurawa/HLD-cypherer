@@ -19,7 +19,7 @@ const commandFolders = fs.readdirSync(foldersPath).filter(folder =>
     fs.lstatSync(path.join(foldersPath, folder)).isDirectory()
 );
 
-for (const folder of commandFolders) {
+for (const folder of commandFolders.filter(f => f === "dev_commands")) {
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
