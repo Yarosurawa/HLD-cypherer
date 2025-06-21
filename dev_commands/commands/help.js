@@ -2,7 +2,7 @@ const { SlashCommandBuilder, MessageFlags} = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('user')
+		.setName('dev_help')
 		.setDescription('Provides information about the user.'),
 	async execute(interaction) {
 		console.log(interaction);

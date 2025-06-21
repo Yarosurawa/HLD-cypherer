@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "npx eslint",
     "commands": "node deploy-commands.js",
+    "global": "node deploy-global.js",
     "serve": "concurrently \"nodemon index.js\" \"nodemon deploy-commands.js\"",
     "start": "node index.js"
   },

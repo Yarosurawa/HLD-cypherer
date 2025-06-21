@@ -2,10 +2,13 @@ const { REST, Routes } = require('discord.js');
 try {
 	const { clientId, discordToken } = require('./config.json');
 	var token = discordToken;
+	var appId = clientId;
 } catch (error) {
 	var token = process.env.DISCORD_TOKEN;
-	var clientId = process.env.CLIENT_ID;
+	var appId = process.env.CLIENT_ID;
 }
+
+console.log(appId);
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -36,7 +39,7 @@ const rest = new REST().setToken(token);
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		const data = await rest.put(
-			Routes.applicationCommands(clientId),
+			Routes.applicationCommands(appId),
 			{ body: commands },
 		);
 

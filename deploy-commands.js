@@ -2,17 +2,19 @@ const { REST, Routes } = require('discord.js');
 try {
 	const { clientId, guildId, discordToken } = require('./config.json');
 	var token = discordToken;
+	var appId = clientId;
+	var serverId = guildId
 } catch (error) {
 	var token = process.env.DISCORD_TOKEN;
-	var clientId = process.env.CLIENT_ID;
-	var guildId = process.env.GUILD_ID;
+	var appId = process.env.CLIENT_ID;
+	var serverId = process.env.GUILD_ID;
 }
 
 const fs = require('node:fs');
 const path = require('node:path');
 
 const commands = [];
-const foldersPath = path.join(__dirname, 'commands');
+const foldersPath = path.join(__dirname, 'dev_commands');
 const commandFolders = fs.readdirSync(foldersPath).filter(folder =>
     fs.lstatSync(path.join(foldersPath, folder)).isDirectory()
 );
@@ -37,7 +39,7 @@ const rest = new REST().setToken(token);
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
+			Routes.applicationGuildCommands(appId, serverId),
 			{ body: commands },
 		);
 
