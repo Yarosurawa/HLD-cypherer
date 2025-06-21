@@ -8,8 +8,6 @@ try {
 	var appId = process.env.CLIENT_ID;
 }
 
-console.log(appId);
-
 const fs = require('node:fs');
 const path = require('node:path');
 

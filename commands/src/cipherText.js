@@ -124,7 +124,7 @@ module.exports = {
 				.setRequired(true))
 		.addIntegerOption(option =>
 			option.setName('height')
-				.setDescription("The height of the tablet"))
+				.setDescription("The height of the tablet")) 
 		.addBooleanOption(option =>
 			option.setName('private')
 				.setDescription('Should it be only visible to the user'))
