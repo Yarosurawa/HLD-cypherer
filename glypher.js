@@ -83,7 +83,7 @@ function charToGlyph(char) {
 	}
 }
     
-export function sortGlyphs(string, height) {
+function sortGlyphs(string, height) {
         let text = "";
         let tabletHeight = height ?? 8;
         let array = Array(tabletHeight*2).fill("\n");
@@ -106,7 +106,7 @@ export function sortGlyphs(string, height) {
         return text;
     }
     
-export function getTranslation(text, bool) {
+function getTranslation(text, bool) {
 	if (bool === true) {
 		return `## Translation: \n || ${text} ||`
 	} else {
@@ -114,3 +114,4 @@ export function getTranslation(text, bool) {
 	}
 }
 
+module.exports = {sortGlyphs, getTranslation, charToGlyph}
