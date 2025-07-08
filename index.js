@@ -1,6 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
+const { getTranslation, sortGlyphs } = require("./glypher.js");
+
+
 try {
 	const { discordToken } = require('./config.json');
 	var token = discordToken;
@@ -38,23 +41,60 @@ for (const folder of commandFolders) {
 }
 
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
+	if (interaction.isChatInputCommand() || interaction.isMessageContextMenuCommand()){
 
-	const command = interaction.client.commands.get(interaction.commandName);
+		const command = interaction.client.commands.get(interaction.commandName);
 
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
+		}
 
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+		try {
+			await command.execute(interaction);
+		} catch (error) {
+			console.error(error);
+			if (interaction.replied || interaction.deferred) {
+				await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+			} else {
+				await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+			}
+		}
+	} else if (interaction.isModalSubmit()) {
+		if (interaction.customId.startsWith('dev_test_thing-')){
+			try {
+				const targetMessageId =  interaction.customId.split('-')[1];
+				const targetMessage = await interaction.channel.messages.fetch(targetMessageId);
+				const input = interaction.fields.getTextInputValue('textInput');
+
+				await targetMessage.reply({
+					content: `${input}`,
+					ephemeral: true,
+				});
+			} catch (error) {
+				throw error
+			}
+			
+		}	else if (interaction.customId.startsWith('dev_cipher_reply-')) {
+			try {
+				const targetMessageId =  interaction.customId.split('-')[1];
+				const targetMessage = await interaction.channel.messages.fetch(targetMessageId);
+				const input = interaction.fields.getTextInputValue('textInput');
+				const height = interaction.fields.getTextInputValue('heightInput');
+				const bool = interaction.fields.getTextInputValue('translationInput') == ("y" || "Y" || "yes" || "Yes") ? true : false
+				
+				await targetMessage.reply({
+					content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(input, bool)}`,
+				});
+
+				await interaction.reply({
+					content: "message sent",
+					flags: MessageFlags.Ephemeral
+				})
+				
+			} catch (error) {
+				throw error
+			}
 		}
 	}
 });

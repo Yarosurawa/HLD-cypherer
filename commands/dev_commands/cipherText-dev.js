@@ -1,118 +1,5 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-
-function charToGlyph(char) {
-	switch (char) {
-		case "A": case "a" : case "O": case "o" :
-			return `█▀█▄
-▀▀▀ `
-			break;
-
-		case "B": case "b" : case "H": case "h" :
-			return `▀▀██
-▀▀▀▀`
-			break;
-
-		case "C": case "c" : case "Q": case "q" :
-			return `█▀██
-▀ ▀▀`
-			break;
-			
-		case "D": case "d" : case "T": case "t" :
-			return `▀█ ▀
- ▀ ▀`
-			break;
-
-		case "E": case "e" : case "U": case "u" :
-			return `▀▀█▄
-  ▀ `
-			break;
-
-		case "F": case "f" : case "V": case "v" :
-			return `██ ▀
-▀▀ ▀`
-			break;
-
-		case "G": case "g" : case "K": case "k" :
-			return `█▄ ▄
-▀   `
-			break;
-
-		case "I": case "i" : case "Y": case "y" :
-			return `▀ █▀
-▀▀▀▀`
-			break;
-
-		case "J": case "j" : case "P": case "p" :
-			return `█ █▄
-▀▀▀ `
-			break;
-
-		case "L": case "l" : case "X": case "x" :
-			return `▄█ ▀
- ▀▀▀`
-			break;
-
-		case "M": case "m" : case "N": case "n" :
-			return `▀█ ▀
-▀▀ ▀`
-			break;
-
-		case "S": case "s" : case "Z": case "z" :
-			return `█▀▀▀
-▀ ▀▀`
-			break;
-
-		case "R": case "r" : case "W": case "w" :
-			return `█▀ █
-▀▀ ▀`
-			break;
-
-		case ",":
-			return ` █  
- ▀  `
-			break;
-
-		case ".":
-			return ` █▀▀
- ▀ ▀`
-		break;
-
-		default:
-			return "def"
-			break;
-	}
-}
-
-function sortGlyphs(string, height) {
-	let text = "";
-	let tabletHeight = height ?? 8;
-	let array = Array(tabletHeight*2).fill("\n");
-	let counter = 0;
-	
-	for (let i = 0; i < string.length; i++) {
-		const el = string[i];
-		if (charToGlyph(el) !== "def") {
-			let j = i - counter;
-			topHalf = charToGlyph(el).slice(0, 4)
-			bottomHalf = charToGlyph(el).slice(5, 10)
-			
-			array[(j%tabletHeight)*2] = `${array[j%tabletHeight*2].slice(0, Math.floor(j/tabletHeight)*5)}${topHalf + " "}\n`
-			array[(j%tabletHeight)*2+1] = `${array[j%tabletHeight*2+1].slice(0, Math.floor(j/tabletHeight)*5)}${bottomHalf + " "}\n`
-			text = array.join("").replaceAll(" ", "\u00A0")
-		} else {
-			counter++
-		}
-	}
-	return text;
-}
-
-function getTranslation(val) {
-	if (val.options.getBoolean('translation') === true) {
-		return `## Translation: \n || ${val.options.getString('input')} ||`
-	} else {
-		return " "
-	}
-}
+const { getTranslation, sortGlyphs } = require("../../glypher.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -122,6 +9,9 @@ module.exports = {
 			option.setName('input')
 				.setDescription('TheInput')
 				.setRequired(true))
+		.addStringOption(option => 
+			option.setName('reply')
+				.setDescription('reply to a message?'))	
 		.addIntegerOption(option =>
 			option.setName('height')
 				.setDescription("The height of the tablet"))
@@ -134,10 +24,23 @@ module.exports = {
 	async execute(interaction) {
 		const input = interaction.options.getString('input');
 		const height = interaction.options.getInteger('height');
-		await interaction.reply({
-			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(interaction)}`,
+		try {
+			const replyId = interaction.options.getString("reply");
+			const targetMessage = await interaction.channel.messages.fetch(replyId);
+
+			await targetMessage.reply({
+					content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(interaction)}`,
+				});
+			await interaction.reply({
+					content: `${input} sent to ${targetMessage.author.username}`,
+					flags: MessageFlags.Ephemeral
+				});
+		} catch (error) {
+			await interaction.reply({
+			content: `\`\`\`\n${sortGlyphs(input, height)}\`\`\`\n${getTranslation(input, interaction.options.getBoolean('translation'))}`,
 			flags: interaction.options.getBoolean('private') ? MessageFlags.Ephemeral : ''
 		})
+		}
 	},
 };
 
