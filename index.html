@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLD cipherer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="left-side main-side">
+            <h1>Inputs</h1>
+            <hr width="300">
+            <div class="inputs flex-center flex-vert">
+                <input type="text" id="text-input" class="text-input" placeholder="Text to cipher">
+                <div class="slider-inputs">
+                    <div class="slider-container flex-center flex-vert">
+                        <div class="slider-text">
+                            <label for="width-input">width</label>
+                            <input type="number" name="width" id="width-input-num" class="number-input" value="4" min="1" max="16">
+                        </div>
+                        <input type="range" name="width" id="width-input" min="1" max="16" value="4">
+                    </div>
+                    <div class="slider-container flex-center flex-vert">
+                        <div class="slider-text">
+                            <label for="height-input">height</label>
+                            <input type="number" name="height" id="height-input-num" class="number-input" value="8" min="1" max="16">
+                        </div>
+                        <input type="range" name="height" id="height-input" min="1" max="16" value="8">
+                    </div>
+                </div>
+                <div class="checkboxes">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="space-cbox">
+                        <label for="space-cbox">Include spaces</label>
+                    </div>
+                    <div class="checkbox-container" onclick="">
+                        <input type="checkbox" id="border-cbox" checked="true">
+                        <label for="border-cbox">Show background</label>
+                    </div>
+                </div>
+                <div class="tablet-styles flex-center flex-vert">
+                    <label for="tablet-style-select">Style of the border</label>
+                    <select name="tablet-style-select" id="tablet-style-select">
+                        <option value="0">0: none</option>
+                        <option value="1">1: (4x8)</option>
+                        <option value="2">2: (1x1 - 16x16)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="right-side main-side">
+            <h1>Output</h1>
+            <hr width="300">
+            <div class="result">
+                <div class="tablet">
+                    <img width="180" height="245" class="tablet-image">
+                    <p id="text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="brainfuckinglyNumbing.js"></script>
+</body>
+</html>
