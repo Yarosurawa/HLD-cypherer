@@ -1,9 +1,10 @@
 const { REST, Routes } = require('discord.js');
+
 try {
 	const { clientId, guildId, discordToken } = require('./config.json');
 	var token = discordToken;
-	var appId = clientId;
-	var serverId = guildId
+	var appId =	clientId;
+	var serverId = guildId;
 } catch (error) {
 	var token = process.env.DISCORD_TOKEN;
 	var appId = process.env.CLIENT_ID;
