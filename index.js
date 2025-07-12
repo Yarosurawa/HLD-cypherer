@@ -3,12 +3,13 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
 const { getTranslation, sortGlyphs } = require("./glypher.js");
 
+let token;
 
 try {
 	const { discordToken } = require('./config.json');
-	var token = discordToken;
+	token = discordToken;
 } catch (error) {
-	var token = process.env.DISCORD_TOKEN;
+	token = process.env.DISCORD_TOKEN;
 }
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });

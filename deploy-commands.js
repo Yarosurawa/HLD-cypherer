@@ -1,14 +1,15 @@
 const { REST, Routes } = require('discord.js');
+let token, appId, serverId;
 
 try {
 	const { clientId, guildId, discordToken } = require('./config.json');
-	var token = discordToken;
-	var appId =	clientId;
-	var serverId = guildId;
+	token = discordToken;
+	appId =	clientId;
+	serverId = guildId;
 } catch (error) {
-	var token = process.env.DISCORD_TOKEN;
-	var appId = process.env.CLIENT_ID;
-	var serverId = process.env.GUILD_ID;
+	token = process.env.DISCORD_TOKEN;
+	appId = process.env.CLIENT_ID;
+	serverId = process.env.GUILD_ID;
 }
 
 const fs = require('node:fs');
