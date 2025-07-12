@@ -98,3 +98,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 });
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => res.send('alive'));
+app.listen(3000, () => console.log('Web server running'));
