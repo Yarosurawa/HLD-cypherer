@@ -7,10 +7,13 @@ let token;
 
 try {
 	const { discordToken } = require('./config.json');
-	token = discordToken;
+	token = discordToken || process.env.DISCORD_TOKEN;
 } catch (error) {
 	token = process.env.DISCORD_TOKEN;
 }
+
+console.log(token);
+
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 

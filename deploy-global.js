@@ -3,8 +3,8 @@ let token, appId;
 
 try {
 	const { clientId, discordToken } = require('./config.json');
-	token = discordToken;
-	appId = clientId;
+	token = discordToken || process.env.DISCORD_TOKEN;
+	appId = clientId || process.env.CLIENT_ID;
 } catch (error) {
 	token = process.env.DISCORD_TOKEN;
 	appId = process.env.CLIENT_ID;

@@ -3,9 +3,9 @@ let token, appId, serverId;
 
 try {
 	const { clientId, guildId, discordToken } = require('./config.json');
-	token = discordToken;
-	appId =	clientId;
-	serverId = guildId;
+	token = discordToken || process.env.DISCORD_TOKEN;
+	appId =	clientId || process.env.CLIENT_ID;
+	serverId = guildId || process.env.GUILD_ID;
 } catch (error) {
 	token = process.env.DISCORD_TOKEN;
 	appId = process.env.CLIENT_ID;
